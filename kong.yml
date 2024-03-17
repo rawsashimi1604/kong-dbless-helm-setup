@@ -1,0 +1,19 @@
+_format_version: "1.1"
+services:
+  - name: sushi-service
+    url: http://sushi-svc-1:8001
+    path: "/"
+    routes:
+      - name: sushi-route
+        paths:
+          - /v1/sushi
+        methods:
+          - GET
+        strip_path: true
+
+      # - name: sushi-restaurant-route
+      #   paths:
+      #     - /v1/sushi/restaurant
+      #   methods:
+      #     - GET
+      #   strip_path: true

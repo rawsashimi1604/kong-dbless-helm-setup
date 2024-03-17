@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sushi-svc-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sushi-svc-1
+  template:
+    metadata:
+      labels:
+        app: sushi-svc-1
+    spec:
+      containers:
+        - name: sushi-svc-1
+          image: rawsashimi/express-sushi-app
+          ports:
+            - containerPort: 3000
+          env:
+            - name: APP_ID
+              value: "8001"
+            - name: JWT_ISSUER
+              value: "someIssuerKey"
+            - name: JWT_SECRET
+              value: "123secret456"

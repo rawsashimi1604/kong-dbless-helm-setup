@@ -1,0 +1,25 @@
+image:
+  repository: kong/kong-gateway
+  tag: "3.4"
+
+admin:
+  # Enable creating a Kubernetes service for the admin API
+  # Enterprise users that wish to use Kong Manager with the controller should enable this
+  enabled: true
+  type: NodePort
+
+readinessProbe:
+  httpGet:
+    # Configure this to get Kong Gateway immediately ready. By default /status/ready is used
+    # ref: https://docs.konghq.com/gateway/latest/production/monitoring/readiness-check
+    path: "/status"
+    port: status
+    scheme: HTTP
+
+env:
+  database: "off"
+
+ingressController:
+  enabled: false
+# dblessConfig:
+#   configMap: "kong-config"
