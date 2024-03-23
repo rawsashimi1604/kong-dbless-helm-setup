@@ -1,6 +1,6 @@
 # Kong dbless setup
 
-## Old setup guide:
+## Old setup guide
 
 ## Create mock deployment and service
 
@@ -30,8 +30,6 @@ helm install kong-dbless kong/kong --values=values.yaml
 minikube service <service_name> --url
 ```
 
-## New setup guide:
+## New setup guide
 
 - Uses helm chart to start kong dbless instance : version 2.8
-- 
-
