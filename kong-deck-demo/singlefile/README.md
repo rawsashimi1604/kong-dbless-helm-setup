@@ -38,5 +38,7 @@ curl http://localhost:8001/routes | jq .data
 # find the difference
 deck diff
 
+# load a new file in
+# drift dectection
 
 ```

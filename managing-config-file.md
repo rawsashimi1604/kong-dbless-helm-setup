@@ -14,8 +14,70 @@ In the case of many services, managing everything in 1 file is unreliable and un
 - Fault Tolerance:
   - File should be regularly backed up, or versioned, so rollback or restore from backup is possible.
 
-## Method 1: Kong deck to compare file
+## Method 1: Kong deck to compare file to test kong container, then dump config file, and upload to kong pods
 
 ![approach-1](./kong-deck-demo/kong-deploy.png)
 
-## Method 2
+- Use `kong deck` as a CLI tool to help manage configuration
+- It is not fully compatible with kong dbless (not able to sync), but there is a workaround we can do.
+- Also provides drift detection, can help sync changes
+- Also feature with open api spec to kong specification, able to help with APIOPs
+
+- Essential commands:
+  - `deck file validate` - validate the deck configuration state file.
+  - `deck gateway diff` - check the diff with existing kong instance.
+  - `deck gateway sync` - sync the diff with existing kong instance.
+  - `deck gateway dump` - dump existing kong configuration to file. (generate new config)
+
+## Method 2: Gitops approach self-written merging approach
+
+Link to medium article: <https://surenraju.medium.com/gitop-approch-to-configuration-management-in-kong-dbless-mode-bf0f9fc0a68e>
+
+- Provide some sort of json schema to validate the configuration (validate at both merged, and individual configuration files)
+
+- Split declaration into multiple files
+- `global` file, globally declared plugins:
+
+```yaml
+plugins:
+ - name: jwt
+   config:
+     header_names: "my-header"
+```
+
+- `service` file, per-service API route configuration defined in a seperate yaml file.
+
+```yaml
+- name: my-route
+   paths:
+   - /my-route
+   methods:
+   - GET
+   plugins:
+   - name: cors
+     config:
+       origins:
+       - example.com
+```
+
+- `master` file, merged configuration
+
+```yaml
+services:
+ - name: my-service
+   url: https://example.com
+   routes:
+     - name: my-route
+     paths:
+     - /my-route
+     methods:
+     - GET
+ plugins:
+ - name: jwt
+   config:
+     header_names: "my-header"
+ - name: cors
+   config:
+     origins:
+     - example.com
+```
