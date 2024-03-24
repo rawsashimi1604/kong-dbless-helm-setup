@@ -7,13 +7,6 @@ plugins:
       - grpcs
       - http
       - https
-  - enabled: true
-    name: prometheus
-    protocols:
-      - grpc
-      - grpcs
-      - http
-      - https
 services:
   - connect_timeout: 60000
     host: example.com

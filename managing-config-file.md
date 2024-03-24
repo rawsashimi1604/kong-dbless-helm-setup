@@ -19,10 +19,10 @@ Kong Dbless only allows all configuration to be stored into 1 config file. In th
 
 ![approach-1](./kong-deck-demo/kong-deploy.png)
 
-- Use `kong deck` as to help manage configuration. [Click here to find out more about deck.](https://docs.konghq.com/deck/latest/)
+- Use `kong deck` as a cli tool to help manage configuration. [Click here to find out more about deck.](https://docs.konghq.com/deck/latest/)
 - [Video](https://www.youtube.com/watch?v=fzpNC5vWE3g&ab_channel=Kong)
 - It is not fully compatible with kong dbless (not able to sync), but there is a workaround we can do.
-- Also provides drift detection, can help sync instance
+- Also provides drift detection, can help sync instance with the input configuration file. (synchronization)
 - Also feature with open api spec to kong specification, able to help with APIOps
 
 - Essential commands:
@@ -31,7 +31,13 @@ Kong Dbless only allows all configuration to be stored into 1 config file. In th
   - `deck gateway sync` - sync the diff with existing kong instance.
   - `deck gateway dump` - dump existing kong configuration to file. (generate new config)
 
-## Method 2: Gitops approach self-written merging approach
+## Method 2: Kong deck (ApiOps tool) simpler approach, use render
+
+- Using kong deck, we can manage seperate complete configurations in different files or repos
+- Merge them together using `kong file render config1.yml config2.yml -o merged --format json`
+- This would generate the config file need to start the new kong instance.
+
+## Method 3: Gitops in-house tool approach
 
 Link to medium article: <https://surenraju.medium.com/gitop-approch-to-configuration-management-in-kong-dbless-mode-bf0f9fc0a68e>
 
