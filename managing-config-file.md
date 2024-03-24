@@ -2,7 +2,7 @@
 
 ## Why manage declaration file
 
-In the case of many services, managing everything in 1 file is unreliable and unsafe, multiple writes could occur at once time and could cause the file to be corrupted.
+Kong Dbless only allows all configuration to be stored into 1 config file. In the case of large scale or multiple teams managing api configurations, managing everything in 1 file is unreliable and unsafe, multiple writes could occur at once time and could cause the file to be corrupted.
 
 ## Constraints
 
@@ -11,6 +11,7 @@ In the case of many services, managing everything in 1 file is unreliable and un
   - Implement locking mechanisms to handle concurrent writes and reads, ensuring that only one process can perform write operations at a time, while still allowing multiple concurrent reads.
 - Data Integrity:
   - Validation: Configuration file should be valid when loaded into kong
+  - Single source of truth for configuration file.
 - Fault Tolerance:
   - File should be regularly backed up, or versioned, so rollback or restore from backup is possible.
 
