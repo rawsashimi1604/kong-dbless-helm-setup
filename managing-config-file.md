@@ -14,14 +14,14 @@ In the case of many services, managing everything in 1 file is unreliable and un
 - Fault Tolerance:
   - File should be regularly backed up, or versioned, so rollback or restore from backup is possible.
 
-## Method 1: Kong deck to compare file to test kong container, then dump config file, and upload to kong pods
+## Method 1: Kong deck (ApiOps tool) to compare file to test kong container, then dump config file, and upload to kong pods
 
 ![approach-1](./kong-deck-demo/kong-deploy.png)
 
-- Use `kong deck` as a CLI tool to help manage configuration
+- Use `kong deck` as to help manage configuration. [Click here to find out more about deck.](https://docs.konghq.com/deck/latest/)
 - It is not fully compatible with kong dbless (not able to sync), but there is a workaround we can do.
-- Also provides drift detection, can help sync changes
-- Also feature with open api spec to kong specification, able to help with APIOPs
+- Also provides drift detection, can help sync instance
+- Also feature with open api spec to kong specification, able to help with APIOps
 
 - Essential commands:
   - `deck file validate` - validate the deck configuration state file.
@@ -34,6 +34,8 @@ In the case of many services, managing everything in 1 file is unreliable and un
 Link to medium article: <https://surenraju.medium.com/gitop-approch-to-configuration-management-in-kong-dbless-mode-bf0f9fc0a68e>
 
 - Provide some sort of json schema to validate the configuration (validate at both merged, and individual configuration files)
+
+- For synchronization, use a sidecar container or cron job every x seconds to send http request to `/GET config`, if different from our main config (which can be pulled from Git repo), we can generate an alert whilst `/POST config` to sync.
 
 - Split declaration into multiple files
 - `global` file, globally declared plugins:
@@ -81,3 +83,5 @@ services:
      origins:
      - example.com
 ```
+
+- When file merged, post the new config to upstream kong pods.
