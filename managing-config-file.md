@@ -19,6 +19,7 @@ In the case of many services, managing everything in 1 file is unreliable and un
 ![approach-1](./kong-deck-demo/kong-deploy.png)
 
 - Use `kong deck` as to help manage configuration. [Click here to find out more about deck.](https://docs.konghq.com/deck/latest/)
+- [Video](https://www.youtube.com/watch?v=fzpNC5vWE3g&ab_channel=Kong)
 - It is not fully compatible with kong dbless (not able to sync), but there is a workaround we can do.
 - Also provides drift detection, can help sync instance
 - Also feature with open api spec to kong specification, able to help with APIOps
