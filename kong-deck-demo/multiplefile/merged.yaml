@@ -55,23 +55,23 @@ services:
         regex_priority: 0
         strip_path: true
     write_timeout: 60000
-# - connect_timeout: 60000
-#   host: foo.com
-#   name: foo
-#   port: 444
-#   protocol: https
-#   read_timeout: 60000
-#   retries: 5
-#   routes:
-#   - https_redirect_status_code: 426
-#     name: bar
-#     paths:
-#     - /bar
-#     - /baz
-#     preserve_host: false
-#     protocols:
-#     - http
-#     - https
-#     regex_priority: 0
-#     strip_path: true
-#   write_timeout: 60000
+- connect_timeout: 60000
+  host: foo.com
+  name: foo
+  port: 444
+  protocol: https
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: bar
+    paths:
+    - /bar
+    - /baz
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    strip_path: true
+  write_timeout: 60000

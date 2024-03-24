@@ -86,4 +86,6 @@ services:
      - example.com
 ```
 
-- When file merged, post the new config to upstream kong pods.
+- When file merged, push the changes to a tmp branch, we can run some sort of integration testing to a mock kong pod, to run the config command
+- If it works we can update the main branch, will will then trigger a helm rolling upgrade to all upstream kong pods to reload and receive new configuration
+- Merge the file into
