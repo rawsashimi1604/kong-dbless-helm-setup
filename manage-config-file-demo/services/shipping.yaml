@@ -1,0 +1,22 @@
+_format_version: "3.0"
+services:
+  - connect_timeout: 60000
+    host: mockshipping.com
+    name: mock-shipping
+    port: 443
+    protocol: https
+    read_timeout: 60000
+    retries: 5
+    routes:
+      - https_redirect_status_code: 426
+        name: mock-shipping-route
+        paths:
+          - /shipping
+          - /calculate-shipping
+        preserve_host: false
+        protocols:
+          - http
+          - https
+        regex_priority: 0
+        strip_path: true
+    write_timeout: 60000

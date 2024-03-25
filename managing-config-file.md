@@ -50,9 +50,9 @@ Link to medium article: <https://surenraju.medium.com/gitop-approch-to-configura
 
 ```yaml
 plugins:
- - name: jwt
-   config:
-     header_names: "my-header"
+  - name: jwt
+    config:
+      header_names: "my-header"
 ```
 
 - `service` file, per-service API route configuration defined in a seperate yaml file.

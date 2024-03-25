@@ -13,15 +13,9 @@
       "routes": [
         {
           "name": "example-route",
-          "paths": [
-            "/example",
-            "/example-route"
-          ],
+          "paths": ["/example", "/example-route"],
           "preserve_host": false,
-          "protocols": [
-            "http",
-            "https"
-          ],
+          "protocols": ["http", "https"],
           "regex_priority": 0,
           "strip_path": true,
           "https_redirect_status_code": 426
@@ -40,15 +34,9 @@
       "routes": [
         {
           "name": "example-route2",
-          "paths": [
-            "/example",
-            "/example-route"
-          ],
+          "paths": ["/example", "/example-route"],
           "preserve_host": false,
-          "protocols": [
-            "http",
-            "https"
-          ],
+          "protocols": ["http", "https"],
           "regex_priority": 0,
           "strip_path": true,
           "https_redirect_status_code": 426
@@ -67,15 +55,9 @@
       "routes": [
         {
           "name": "bar",
-          "paths": [
-            "/bar",
-            "/baz"
-          ],
+          "paths": ["/bar", "/baz"],
           "preserve_host": false,
-          "protocols": [
-            "http",
-            "https"
-          ],
+          "protocols": ["http", "https"],
           "regex_priority": 0,
           "strip_path": true,
           "https_redirect_status_code": 426
@@ -87,12 +69,7 @@
     {
       "name": "prometheus",
       "enabled": true,
-      "protocols": [
-        "grpc",
-        "grpcs",
-        "http",
-        "https"
-      ]
+      "protocols": ["grpc", "grpcs", "http", "https"]
     }
   ]
 }
