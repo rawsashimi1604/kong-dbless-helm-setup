@@ -13,29 +13,6 @@ KONG_DECK_FILE_OUTPUT_FORMAT = "yaml"
 KONG_DECK_FILE_OUTPUT = "merged.yaml"
 
 # Testcontainers
-class DeckContainer(DockerContainer):
-    """An instance of Kong deck in a docker container."""
-
-    KONG_DECK_IMAGE = "kong/deck:v1.36.1"
-
-    def __init__(self, command: list, image=KONG_DECK_IMAGE):
-        """Create a new instance of Kong Deck."""
-
-        super().__init__(image)
-        self.with_volume_mapping(os.getcwd(), '/data', 'rw')
-        self.with_command(command)
-        self.start()
-
-        logs = self.get_logs()
-        for log in logs:
-            # Error when running validate
-            decoded = log.decode('utf-8').strip()
-            if ("Error: building state: " in decoded):
-                raise Exception("error when decoding")
-            print(log.decode('utf-8').strip())
-
-        
-
 class KongDblessContainer(DockerContainer):
     """An instance of Kong running in DB-less mode in a docker container."""
     

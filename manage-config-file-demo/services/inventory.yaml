@@ -2,7 +2,7 @@ _format_version: "2.1"
 services:
   - connect_timeout: 60000
     host: mockinventory.com
-    name: mock-frontend
+    name: mock-inventory
     port: 443
     protocol: https
     read_timeout: 60000
