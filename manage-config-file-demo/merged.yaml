@@ -1,8 +1,9 @@
-_format_version: "3.0"
+_format_version: "2.1"
 plugins:
 - config:
-    header_names: my-header
-  name: jwt
+    key_names:
+    - apiKey
+  name: key-auth
 services:
 - connect_timeout: 60000
   host: mockfrontend.com
@@ -26,7 +27,7 @@ services:
   write_timeout: 60000
 - connect_timeout: 60000
   host: mockinventory.com
-  name: mock-inventory
+  name: mock-frontend
   port: 443
   protocol: https
   read_timeout: 60000

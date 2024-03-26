@@ -15,7 +15,7 @@ printf "%s\n" "${serviceFiles[@]}"
 
 # Use Docker to run the deck command. Each file path needs to be passed individually to the docker run command.
 # Start the docker command
-dockerCmd="docker run --rm -v $PWD:/data $dockerImage file merge"
+dockerCmd="docker run --rm -v $PWD:/data $dockerImage file render"
 
 # Add each global file to the command
 for file in "${globalFiles[@]}"; do
@@ -32,13 +32,4 @@ dockerCmd+=" -o /data/merged.$outputFormat --format $outputFormat --analytics=fa
 
 # Execute the command
 eval $dockerCmd
-
-# Capture the exit status of the Docker command
-exitStatus=$?
-
-if [ $exitStatus -ne 0 ]; then
-    echo "Error: The command failed with exit status $exitStatus."
-    exit $exitStatus
-else
-    echo "File generated: merged.$outputFormat"
-fi
+echo "File generated: merged.$outputFormat"
