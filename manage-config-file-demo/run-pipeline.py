@@ -1,4 +1,3 @@
-import os
 import yaml
 import requests
 import subprocess
@@ -9,8 +8,6 @@ from testcontainers.core.container import DockerContainer
 # Constants
 DEFAULT_MERGE_SCRIPT_PATH = "./merge_files.sh"
 DEFAULT_MERGE_FILE_PATH = "./merged.yaml"
-KONG_DECK_FILE_OUTPUT_FORMAT = "yaml"
-KONG_DECK_FILE_OUTPUT = "merged.yaml"
 
 # Testcontainers
 class KongDblessContainer(DockerContainer):
@@ -41,14 +38,14 @@ class KongDblessContainer(DockerContainer):
         url = f"http://{self.get_container_host_ip()}:{self.get_exposed_port('8001')}/"
         while True:
             try:
-                print("[*] Waiting for Kong to become ready, testing GET /config")
+                print("[*] Waiting for Kong to become ready, testing GET /")
                 response = requests.get(url, timeout=5)
                 if response.status_code == 200:
-                    print("[*] Kong is ready! GET /config returned 200 OK")
+                    print("[*] Kong is ready! GET / returned 200 OK")
                     break
 
             except requests.exceptions.RequestException:
-                pass  # Ignore network-related errors during startup
+                pass  
 
             if time.time() - start_time > timeout:
                 raise TimeoutError("[*] Timed out waiting for Kong to become ready")
@@ -94,7 +91,6 @@ if __name__ == "__main__":
 
     print("[*] Starting config file with kong integration test")
     with KongDblessContainer() as kong:
-        print("[*] Starting kong container")
         print("[+] Kong container started")
         print("[*] Running integration test")
         kong.testAdminConfigRoute()
